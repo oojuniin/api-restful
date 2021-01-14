@@ -1,6 +1,7 @@
 package com.api.restful.product;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,24 @@ public class ProductService implements Serializable {
 
 	@Transactional
 	public Product save(Product stock) {
+		stock.setCreatedAt(Instant.now());
+		stock.setUpdatedAt(Instant.now());
 		return repository.save(stock);
+	}
+
+	@Transactional
+	public Product update(Long id, Product stock) {
+		Product product = repository.findById(id).get();
+
+		product.setId(id);
+		product.setName(stock.getName());
+		product.setDescription(stock.getDescription());
+		product.setPrice(stock.getPrice());
+		product.setCreatedAt(product.getCreatedAt());
+		product.setUpdatedAt(Instant.now());
+
+		return repository.save(product);
+
 	}
 
 	@Transactional

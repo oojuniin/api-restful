@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api")
 @Slf4j
-public class ProductAPI implements Serializable {
+public class ProductController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class ProductAPI implements Serializable {
 	}
 
 	@PostMapping
-	public ResponseEntity<Product> create(@RequestBody Product product) {
+	public ResponseEntity<Product> save(@RequestBody Product product) {
 		return ResponseEntity.ok(service.save(product));
 	}
 
@@ -57,7 +57,7 @@ public class ProductAPI implements Serializable {
 			ResponseEntity.badRequest().build();
 		}
 
-		return ResponseEntity.ok(service.save(product));
+		return ResponseEntity.ok(service.update(id, product));
 	}
 
 	@DeleteMapping("/{id}")
