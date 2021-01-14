@@ -1,7 +1,6 @@
 package com.api.restful.product;
 
 import java.io.Serializable;
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,12 +46,12 @@ public class ProductAPI implements Serializable {
 	}
 
 	@PostMapping
-	public ResponseEntity<Product> create(@Valid @RequestBody Product product) {
+	public ResponseEntity<Product> create(@RequestBody Product product) {
 		return ResponseEntity.ok(service.save(product));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Product> update(@PathVariable Long id, @Valid @RequestBody Product product) {
+	public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product product) {
 
 		if (service.findById(id).isEmpty()) {
 			log.error("ID " + id + " is not existed.");

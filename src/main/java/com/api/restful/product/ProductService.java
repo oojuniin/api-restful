@@ -21,7 +21,7 @@ public class ProductService implements Serializable {
 		return repository.findAll();
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public Optional<Product> findById(Long id) {
 		return repository.findById(id);
 	}
@@ -30,7 +30,7 @@ public class ProductService implements Serializable {
 	public Product save(Product stock) {
 		Product prod = new Product();
 
-		if (repository.findById(stock.getId()).isPresent()) {
+		if (findById(stock.getId()).isPresent()) {
 
 			prod.setId(stock.getId());
 			prod.setName(stock.getName());
