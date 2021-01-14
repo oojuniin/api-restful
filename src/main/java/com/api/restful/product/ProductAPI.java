@@ -49,10 +49,7 @@ public class ProductAPI implements Serializable {
 
 	@PostMapping
 	public ResponseEntity<Product> create(@Valid @RequestBody Product product) {
-		product = service.save(product);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(product.getId())
-				.toUri();
-		return ResponseEntity.created(uri).body(product);
+		return ResponseEntity.ok(service.save(product));
 	}
 
 	@PutMapping("/{id}")
