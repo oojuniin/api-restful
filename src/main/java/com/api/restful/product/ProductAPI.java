@@ -55,7 +55,7 @@ public class ProductAPI implements Serializable {
 
 		if (service.findById(id).isEmpty()) {
 			log.error("ID " + id + " is not existed.");
-			return ResponseEntity.notFound().build();
+			ResponseEntity.badRequest().build();
 		}
 
 		return ResponseEntity.ok(service.save(product));
