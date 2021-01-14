@@ -56,7 +56,7 @@ public class ProductAPI implements Serializable {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product product) {
+	public ResponseEntity<Product> update(@PathVariable Long id, @Valid @RequestBody Product product) {
 
 		if (service.findById(id).isEmpty()) {
 			log.error("ID " + id + " is not existed.");

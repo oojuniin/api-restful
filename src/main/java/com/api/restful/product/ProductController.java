@@ -8,6 +8,6 @@ public class ProductController {
 
 	@GetMapping("/")
 	public String list() {
-		return "products";
+		return "/restful/src/main/resources/templates/product.html";
 	}
 }
