@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +35,7 @@ public class ProductAPI implements Serializable {
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id) {
 		Optional<Product> stock = service.findById(id);
+		
 		if (stock.isEmpty()) {
 			log.error("ID " + id + " is not existed.");
 			ResponseEntity.notFound().build();

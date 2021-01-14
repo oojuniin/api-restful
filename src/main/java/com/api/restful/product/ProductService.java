@@ -28,19 +28,6 @@ public class ProductService implements Serializable {
 
 	@Transactional
 	public Product save(Product stock) {
-		Product prod = new Product();
-
-		if (findById(stock.getId()).isPresent()) {
-
-			prod.setId(stock.getId());
-			prod.setName(stock.getName());
-			prod.setDescription(stock.getDescription());
-			prod.setPrice(stock.getPrice());
-			prod.setCreatedAt(stock.getCreatedAt());
-			
-			return repository.save(prod);
-		}
-		
 		return repository.save(stock);
 	}
 
